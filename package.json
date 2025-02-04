@@ -1,9 +1,9 @@
 {
-  "name": "boilerplate_parcel",
+  "name": "moment3",
   "version": "1.0.0",
   "source": "src/pages/index.html",
   "scripts": {
-    "start": "parcel",
+    "start": "parcel --open opera",
     "build": "parcel build src/pages/index.html --public-url ./",
     "deploy": "npm run build && gh-pages -d dist"
   },
