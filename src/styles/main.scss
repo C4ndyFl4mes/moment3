@@ -1,5 +1,14 @@
+@use "layout";
+
 .poster{
     width: 100%;
     max-width: 100px;
     height: auto;
+}
+.prev {
+    transform: rotate(180deg);
+}
+
+.anime-list-item {
+    @extend %anime-grid;
 }
