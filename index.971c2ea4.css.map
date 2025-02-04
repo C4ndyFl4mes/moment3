@@ -1,0 +1,1 @@
+{"mappings":"AAAA","sources":["src/styles/main.scss"],"sourcesContent":[".poster{\r\n    width: 100%;\r\n    max-width: 100px;\r\n    height: auto;\r\n}"],"names":[],"version":3,"file":"index.971c2ea4.css.map","sourceRoot":"/__parcel_source_root/"}
