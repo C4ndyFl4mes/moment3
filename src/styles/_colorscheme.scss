@@ -1,0 +1,13 @@
+@use "base";
+
+@mixin theme($theme) {
+    @if $theme ==dark {
+        color: base.$dath-fg-color;
+        background-color: base.$dath-bg-color;
+    }
+
+    @else if $theme ==light {
+        color: base.$lith-fg-color;
+        background-color: base.$lith-bg-color;
+    }
+}

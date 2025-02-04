@@ -1,14 +1,43 @@
-@use "layout";
+@use "base"; // <----------------- Variables.
+@use "layout"; // <--------------- Layouts.
+@use "colorscheme"; // <---------- Dark/Light Themes.
 
+body {
+    @include colorscheme.theme(light);
+    font-family: base.$font-stack;
+}
+
+main {
+    width: 95%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+// The poster for anime
 .poster{
     width: 100%;
-    max-width: 100px;
+    max-width: 225px;
     height: auto;
 }
+
+// To turn the svg arrow on the previous button the other way.
 .prev {
     transform: rotate(180deg);
 }
 
 .anime-list-item {
-    @extend %anime-grid;
+    @extend %anime-layout;
+    line-height: base.$anime-line-height;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        @include colorscheme.theme(dark);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .anime-list-item {
+        @extend %anime-layout-mobile;
+    }
 }

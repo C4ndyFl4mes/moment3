@@ -1,3 +1,6 @@
+import "@fontsource/roboto"; // Normal
+import "@fontsource/roboto/700.css"; // Bold
+
 const animeListDIV = document.getElementById("anime-list");
 
 // När sidan laddas in hämtas och renderas första sidan av anime listan.
@@ -38,11 +41,29 @@ async function renderList(page = 1) {
             animeListDIV.innerHTML +=
                 `<article class=anime-list-item>
                     <h2>${title}</h2>
-                    <picture class=poster>
-                        <source srcset="${anime.images.webp.image_url}" type="image/webp">
-                        <img src="${anime.images.jpg.image_url}" width="100" height="141" alt="" loading="lazy" class=poster>
-                    </picture>
-                    <p>${anime.synopsis}</p>
+                    <div>
+                        <picture class=poster>
+                            <source srcset="${anime.images.webp.image_url}" type="image/webp">
+                            <img src="${anime.images.jpg.image_url}" width="100" height="141" alt="" loading="lazy" class=poster>
+                        </picture>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Score</th>
+                                    <th>Rating</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>#${anime.rank}</td>
+                                    <td>${anime.score}</td>
+                                    <td>${anime.rating}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>${anime.synopsis}</p>
+                    </div>
                 </article>`;
         });
     }

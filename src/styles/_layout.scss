@@ -1,14 +1,24 @@
-%anime-grid {
-    display: grid;
-    grid-template-columns: auto auto;
+// The layout for the article that holds information about the anime.
+%anime-layout {
+    display: flex;
+    flex-direction: column;
 
-    h2 {
-        grid-area: 1/1/2/3;
-    }
     .poster {
-        grid-area: 2/1/3/2;
+        float: left;
+        margin-right: 1rem;
+
     }
+
     p {
-        grid-area: 2/2/3/3;
+        margin: 0;
+        text-align: justify;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    %anime-layout-mobile {
+        .poster {
+            float: none;
+        }
     }
 }
