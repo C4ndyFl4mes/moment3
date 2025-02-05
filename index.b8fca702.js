@@ -637,7 +637,7 @@ async function renderList(page = 1) {
                         </picture>
                         <table>
                             <thead>
-                                <tr>
+                                <tr class=anime-row>
                                     <th>Rank</th>
                                     <th>Score</th>
                                     <th>Rating</th>
@@ -651,6 +651,7 @@ async function renderList(page = 1) {
                                 </tr>
                             </tbody>
                         </table>
+                        <h3>Beskrivning</h3>
                         <p>${anime.synopsis}</p>
                     </div>
                 </article>`;
@@ -658,10 +659,10 @@ async function renderList(page = 1) {
     }
 }
 // Hämtar top anime från Jikan API, argumentet (page) i parametern ser till en och samma anime inte hämtas mer än en gång.
-// Varje sida innehåller max 5 anime då det ska finnas plats med överskrifter och text.
+// Varje sida innehåller max 10 anime då det ska finnas plats med överskrifter och text.
 async function getTopAnime(page = 1) {
     try {
-        const resp = await fetch(`https://api.jikan.moe/v4/top/anime?page=${page}&limit=5`);
+        const resp = await fetch(`https://api.jikan.moe/v4/top/anime?page=${page}&limit=10`);
         const data = await resp.json();
         animePagesofLists(page, data.data); // Anropar för att ordna en array som ska lagras i localStorage.
     } catch (error) {
