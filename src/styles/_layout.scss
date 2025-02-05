@@ -1,24 +1,67 @@
+@use "colorscheme";
+
 // The layout for the article that holds information about the anime.
 %anime-layout {
+    max-width: 600px;
+    padding: 1rem;
+
+    border-radius: 20px;
+    border: 1px solid;
+
     display: flex;
     flex-direction: column;
 
+    // The image of the anime.
     .poster {
         float: left;
         margin-right: 1rem;
-
     }
 
     p {
         margin: 0;
         text-align: justify;
     }
+
+    h3 {
+        margin-bottom: 0.1rem;
+    }
+
+    table {
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    // The rows of the table.
+    tr {
+        display: grid;
+        grid-template-columns: 25% 25% 50%;
+        grid-template-rows: auto auto;
+        text-align: center;
+
+        // The cells of the table.
+        td,
+        th {
+            align-content: center;
+            border: 1px solid;
+            @include colorscheme.theme(light);
+
+            @media (prefers-color-scheme: dark) {
+                @include colorscheme.theme(dark);
+            }
+        }
+
+    }
 }
 
+// Mobile
 @media screen and (max-width: 600px) {
     %anime-layout-mobile {
         .poster {
             float: none;
+        }
+
+        table {
+            width: 100%;
         }
     }
 }

@@ -3,18 +3,32 @@
 @use "colorscheme"; // <---------- Dark/Light Themes.
 
 body {
+    margin: 0;
     @include colorscheme.theme(light);
     font-family: base.$font-stack;
 }
 
 main {
     width: 95%;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
+    padding: 1rem;
+
+    border-radius: 20px;
+
+}
+
+// The div that holds the anime list.
+#anime-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 75px;
 }
 
 // The poster for anime
-.poster{
+.poster {
     width: 100%;
     max-width: 225px;
     height: auto;
@@ -30,6 +44,7 @@ main {
     line-height: base.$anime-line-height;
 }
 
+// Changes the theme from the body to all relevant child elements through extension in the theme mixin.
 @media (prefers-color-scheme: dark) {
     body {
         @include colorscheme.theme(dark);
@@ -37,6 +52,10 @@ main {
 }
 
 @media screen and (max-width: 600px) {
+    main {
+        width: 100%;
+    }
+
     .anime-list-item {
         @extend %anime-layout-mobile;
     }
