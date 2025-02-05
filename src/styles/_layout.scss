@@ -1,5 +1,24 @@
 @use "colorscheme";
 
+.list-navigation {
+    height: 4rem;
+    margin: 4rem 0;
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    #search-field,
+    #search {
+        height: 2rem;
+    }
+    
+    svg {
+        height: 100%;
+        aspect-ratio: 1/1;
+    }
+}
+
 // The layout for the article that holds information about the anime.
 %anime-layout {
     max-width: 600px;
@@ -49,7 +68,6 @@
                 @include colorscheme.theme(dark);
             }
         }
-
     }
 }
 

@@ -1,7 +1,9 @@
 @use "base";
 @use "sass:color";
 
-// This is called only from the body element, 
+
+
+// This is called only from the body element,
 // light is standard and dark is called from a media query prefers dark containing the body.
 @mixin theme($theme) {
     @if $theme ==dark {
@@ -9,9 +11,7 @@
         background-color: base.$dath-bg-color;
         border-color: base.$dath-fg-color;
         @extend %dark-theme; // Extends the theme by nesting.
-    }
-
-    @else if $theme ==light {
+    } @else if $theme ==light {
         color: base.$lith-fg-color;
         background-color: base.$lith-bg-color;
         border-color: base.$lith-fg-color;
@@ -19,22 +19,37 @@
     }
 }
 
+// The theme and visual effects for buttons.
+%button-theme {
+    .button {
+        background-color: base.$btn-color;
+    }
+    .button:hover {
+        background-color: color.adjust(base.$btn-color, $lightness: -5%);
+    }
+    .button:active {
+        background-color: color.adjust(base.$btn-color, $lightness: -10%);
+    }
+}
+
 // Extends from the body through theme mixin when the theme is light.
 %light-theme {
     main {
         background-color: color.adjust(base.$lith-bg-color, $lightness: -3%);
-
     }
 
     .anime-list-item {
         background-color: color.adjust(base.$lith-bg-color, $lightness: -6%);
     }
 
+    #search-field {
+        background-color: base.$lith-search-bg-color;
+        font-family: base.$font-stack;
+    }
 }
 
 // Cannot extend cross queries.
 @media (prefers-color-scheme: dark) {
-
     // Extends from the body through theme mixin when the theme is dark.
     %dark-theme {
         main {
@@ -43,6 +58,11 @@
 
         .anime-list-item {
             background-color: color.adjust(base.$dath-bg-color, $lightness: -6%);
+        }
+        #search-field {
+            background-color: base.$dath-search-bg-color;
+            color: base.$dath-fg-color;
+            font-family: base.$font-stack;
         }
     }
 }
