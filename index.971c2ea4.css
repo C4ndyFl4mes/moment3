@@ -1,9 +1,26 @@
+body .button {
+  background-color: #0fa;
+}
+
+body .button:hover {
+  background-color: #00e699;
+}
+
+body .button:active {
+  background-color: #0c8;
+}
+
 body main, .anime-list-item tr td main, .anime-list-item tr th main {
   background-color: #e6e6e6;
 }
 
 body .anime-list-item, .anime-list-item tr td .anime-list-item, .anime-list-item tr th .anime-list-item {
   background-color: #dfdfdf;
+}
+
+body #search-field, .anime-list-item tr td #search-field, .anime-list-item tr th #search-field {
+  background-color: #0fa;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -14,6 +31,29 @@ body .anime-list-item, .anime-list-item tr td .anime-list-item, .anime-list-item
   body .anime-list-item, .anime-list-item tr td .anime-list-item, .anime-list-item tr th .anime-list-item {
     background-color: #242424;
   }
+
+  body #search-field, .anime-list-item tr td #search-field, .anime-list-item tr th #search-field {
+    color: #eee;
+    background-color: #007a52;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+  }
+}
+
+.list-navigation {
+  justify-content: space-evenly;
+  align-items: center;
+  height: 4rem;
+  margin: 4rem 0;
+  display: flex;
+}
+
+.list-navigation #search-field, .list-navigation #search {
+  height: 2rem;
+}
+
+.list-navigation svg {
+  aspect-ratio: 1;
+  height: 100%;
 }
 
 .anime-list-item {

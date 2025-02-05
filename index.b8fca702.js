@@ -637,7 +637,7 @@ async function renderList(page = 1) {
                         </picture>
                         <table>
                             <thead>
-                                <tr class=anime-row>
+                                <tr>
                                     <th>Rank</th>
                                     <th>Score</th>
                                     <th>Rating</th>
