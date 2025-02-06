@@ -598,14 +598,30 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 },{}],"3cYfC":[function(require,module,exports,__globalThis) {
 var _roboto = require("@fontsource/roboto"); // Normal
 var _700Css = require("@fontsource/roboto/700.css"); // Bold
+const prevBTN = document.getElementById("prev-btn");
+const nextBTN = document.getElementById("next-btn");
+const pageNumberSPAN = document.getElementById("page-number");
+const maxPageSPAN = document.getElementById("max-pages");
 const animeListDIV = document.getElementById("anime-list");
 // När sidan laddas in hämtas och renderas första sidan av anime listan.
 window.onload = async ()=>{
     if (!localStorage.getItem("animePagesofLists")) await getTopAnime();
+    // Sätter visuellt vilken sida som användaren står på vid inladdning av sidan.
+    if (localStorage.getItem("page")) {
+        const pageData = JSON.parse(localStorage.getItem("page"));
+        pageNumberSPAN.innerHTML = pageData.current;
+        maxPageSPAN.innerHTML = pageData.last;
+    }
     renderList();
 };
 // Renderar en sida beroende på vilken sida det är, standard är första sidan.
 async function renderList(page = 1) {
+    // Uppdaterar visuellt vilken sida användaren står på.
+    if (localStorage.getItem("page")) {
+        const pageData = JSON.parse(localStorage.getItem("page"));
+        pageNumberSPAN.innerHTML = pageData.current;
+        maxPageSPAN.innerHTML = pageData.last;
+    }
     if (localStorage.getItem("animePagesofLists")) {
         // Hämtar listan från localStorage:
         const pagesofLists = JSON.parse(localStorage.getItem("animePagesofLists"));
@@ -663,7 +679,15 @@ async function renderList(page = 1) {
 async function getTopAnime(page = 1) {
     try {
         const resp = await fetch(`https://api.jikan.moe/v4/top/anime?page=${page}&limit=10`);
+        if (resp.status === 429) {
+            alert("Maximalt antal f\xf6rfr\xe5gningar till API:n \xe4r begr\xe4nsad, men alla f\xf6reg\xe5ende sidor som redan h\xe4mtas fungerar som normalt.");
+            return;
+        }
         const data = await resp.json();
+        localStorage.setItem("page", JSON.stringify({
+            current: page,
+            last: data.pagination.last_visible_page
+        })); // Sätter/uppdaterar vilken sida användaren står på.
         animePagesofLists(page, data.data); // Anropar för att ordna en array som ska lagras i localStorage.
     } catch (error) {
         console.error(error);
@@ -687,6 +711,35 @@ async function animePagesofLists(page, animeList) {
         }
     ]));
 }
+// Till föregående sida.
+prevBTN.addEventListener("click", ()=>{
+    if (localStorage.getItem("page")) {
+        const pageData = JSON.parse(localStorage.getItem("page"));
+        // Stegar bakåt i en loop. Om användaren står på sida 1 blir föregående sida sista sidan med hjälp av if-satsen nedan.
+        let prevPage = (pageData.current - 1 + pageData.last) % pageData.last;
+        // Sista sidan blir pageData.last % pageData.last men det blir 0 och det finns inte och för att sista sidan ska bli möjlig måste sida 0 vara sista sidan. 
+        if (prevPage == 0) prevPage = pageData.last;
+        localStorage.setItem("page", JSON.stringify({
+            current: prevPage,
+            last: pageData.last
+        })); // Sätter/uppdaterar vilken sida användaren står på.
+        renderList(prevPage); // Renderar listan.
+    }
+});
+// Till nästa sida.
+nextBTN.addEventListener("click", ()=>{
+    if (localStorage.getItem("page")) {
+        const pageData = JSON.parse(localStorage.getItem("page"));
+        // Stegar frammåt i en loop. Precis som ovanstående funktion men åt andra hållet.
+        let nextPage = (pageData.current + 1) % pageData.last;
+        if (nextPage == 0) nextPage = pageData.last;
+        localStorage.setItem("page", JSON.stringify({
+            current: nextPage,
+            last: pageData.last
+        })); // Sätter/uppdaterar vilken sida användaren står på.
+        renderList(nextPage); // Renderar listan.
+    }
+});
 
 },{"@fontsource/roboto":"jgvpq","@fontsource/roboto/700.css":"4mrIr"}],"jgvpq":[function() {},{}],"4mrIr":[function() {},{}]},["k51Nd","3cYfC"], "3cYfC", "parcelRequire94c2")
 
