@@ -3,6 +3,7 @@ import "@fontsource/roboto/700.css"; // Bold
 
 const prevBTN = document.getElementById("prev-btn");
 const nextBTN = document.getElementById("next-btn");
+const searchFIELD = document.getElementById("search-field");
 const pageNumberSPAN = document.getElementById("page-number");
 const maxPageSPAN = document.getElementById("max-pages");
 const animeListDIV = document.getElementById("anime-list");
@@ -45,45 +46,47 @@ async function renderList(page = 1) {
             }
         }
     }
-    // Renderar en lista.
-    function listOnPage(list) {
-        // Använder innerHTML för att det ska bli så smidigt som möjligt.
-        animeListDIV.innerHTML = "";
-        list.forEach(anime => {
-            let title = anime.title_english;
-            if (anime.title_english === null) {
-                title = anime.title;
-            }
-            animeListDIV.innerHTML +=
-                `<article class=anime-list-item>
-                    <h2>${title}</h2>
-                    <div>
-                        <picture class=poster>
-                            <source srcset="${anime.images.webp.image_url}" type="image/webp">
-                            <img src="${anime.images.jpg.image_url}" width="100" height="141" alt="" loading="lazy" class=poster>
-                        </picture>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Rank</th>
-                                    <th>Score</th>
-                                    <th>Rating</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>#${anime.rank}</td>
-                                    <td>${anime.score}</td>
-                                    <td>${anime.rating}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <h3>Beskrivning</h3>
-                        <p>${anime.synopsis}</p>
-                    </div>
-                </article>`;
-        });
-    }
+
+}
+
+// Renderar en lista.
+function listOnPage(list) {
+    // Använder innerHTML för att det ska bli så smidigt som möjligt.
+    animeListDIV.innerHTML = "";
+    list.forEach(anime => {
+        let title = anime.title_english;
+        if (anime.title_english === null) {
+            title = anime.title;
+        }
+        animeListDIV.innerHTML +=
+            `<article class=anime-list-item>
+                <h2>${title}</h2>
+                <div>
+                    <picture class=poster>
+                        <source srcset="${anime.images.webp.image_url}" type="image/webp">
+                        <img src="${anime.images.jpg.image_url}" width="100" height="141" alt="" loading="lazy" class=poster>
+                    </picture>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Score</th>
+                                <th>Rating</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#${anime.rank || "N/A"}</td>
+                                <td>${anime.score || "N/A"}</td>
+                                <td>${anime.rating || "N/A"}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h3>Beskrivning</h3>
+                    <p>${anime.synopsis || "N/A"}</p>
+                </div>
+            </article>`;
+    });
 }
 
 // Hämtar top anime från Jikan API, argumentet (page) i parametern ser till en och samma anime inte hämtas mer än en gång.
@@ -106,7 +109,7 @@ async function getTopAnime(page = 1) {
 
 // Skapar objekt med två egenskaper:
 // page är som ett id som håller reda på vilken lista som den innehåller. Detta är för att vi endast hämtar en liten del av en gigantisk lista av anime.
-// list är den lista som tillhör page, i detta faller är det 25 list items.
+// list är den lista som tillhör page, i detta faller är det 10 list items.
 async function animePagesofLists(page, animeList) {
     if (localStorage.getItem("animePagesofLists")) {
         const pagesofLists = JSON.parse(localStorage.getItem("animePagesofLists"));
@@ -114,6 +117,40 @@ async function animePagesofLists(page, animeList) {
         localStorage.setItem("animePagesofLists", JSON.stringify(pagesofLists));
     } else {
         localStorage.setItem("animePagesofLists", JSON.stringify([{ page: page, list: animeList }]));
+    }
+}
+
+// Sökfältet, det är 500ms delay för att inte överstiga API:ns begränsade request rate.
+let timeout;
+searchFIELD.addEventListener("input", () => {
+    clearTimeout(timeout);
+    timeout = setTimeout(async () => {
+        // Om fältet är tomt kommer användaren hamna på sidan den var på innan sökningen.
+        if (searchFIELD.value.trim() === "") {
+            if (localStorage.getItem("page")) {
+                const pageData = JSON.parse(localStorage.getItem("page"));
+                pageNumberSPAN.innerHTML = pageData.current;
+                maxPageSPAN.innerHTML = pageData.last;
+                renderList(pageData.current); // <---- Sätter vilken sida användaren ska ställas på.
+            }
+        } else {
+            // Hämtar en lista av tio anime som kan motsvara förfrågan.
+            const list = await searchAnime(searchFIELD.value.trim());
+            // Anropar funktionen som renderar en lista.
+            listOnPage(list);
+        }
+    }, 500);
+});
+
+// Tar emot söktermen från sökfältet och söker i API:n. Returnerar en lista av 10 animes som motsvarar den sökta termen.
+async function searchAnime(query) {
+    try {
+        const resp = await fetch(`https://api.jikan.moe/v4/anime?q=${query}&limit=10`);
+        const data = await resp.json();
+
+        return data.data;
+    } catch (error) {
+        console.error(error);
     }
 }
 
