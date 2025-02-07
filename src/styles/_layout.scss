@@ -1,5 +1,105 @@
 @use "colorscheme";
 
+header {
+    z-index: 10;
+    position: fixed;
+    top: 0;
+
+    width: 100%;
+    height: 3rem;
+
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+
+    border-bottom: 1px solid;
+
+    display: flex;
+    flex-direction: row;
+
+    p {
+        width: 100%;
+    }
+}
+
+// The element that holds the menu nav and menu button.
+.menu-holder {
+    position: absolute;
+    top: 100%;
+    right: 15%;
+
+    width: 70%;
+    
+    overflow: hidden;
+    
+    min-height: 3rem;
+    height: fit-content;
+
+    display: grid;
+    grid-template-rows: 3rem 0px;
+
+    transition: 0.5s;
+
+    // The nav.
+    #menu {
+        display: block;
+        transition: 0.5s;
+        overflow: hidden;
+    }
+
+    // The list in the nav.
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        height: inherit;
+        li {
+            flex: 1;
+            display: flex;
+            height: inherit;
+            flex-direction: row;
+            a {
+                flex: 1;
+                display: grid; // To center the text.
+                place-items: center;
+            }
+        }
+    }
+}
+
+#menu-btn {
+    z-index: 100;
+    
+    display: none;
+    border: 1px solid;
+    border-top: none;
+    margin: 0 auto;
+    width: 100%;
+    height: 2.5rem;
+
+    cursor: pointer;
+
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    img {
+        height: 100%;
+        aspect-ratio: 1/1;
+    }
+}
+
+main {
+    width: 95%;
+    max-width: 1400px;
+    margin: 0 auto;
+    margin-top: 10rem;
+    padding: 1rem;
+
+    border-radius: 20px;
+}
+
 .list-navigation {
     height: 4rem;
     margin: 4rem 0;
@@ -12,7 +112,7 @@
     #search {
         height: 2rem;
     }
-    
+
     svg {
         height: 100%;
         aspect-ratio: 1/1;
@@ -71,8 +171,39 @@
     }
 }
 
+// Indicates where the user is.
+.here>a {
+    font-weight: 700;
+    border-bottom: 3px solid;
+    box-shadow: 0px 5px 10px black;
+    z-index: 1;
+}
+
 // Mobile
 @media screen and (max-width: 600px) {
+    // Center the "Moment 3" text.
+    header {
+        text-align: center;
+    }
+    .menu-holder {
+        grid-template-rows: 0px 2.5rem;
+        border-top: 1px solid; // Is placed above the header's border-bottom. It has the same color as the header's background.
+    
+        // Change the direction of the menu items.
+        ul {
+            flex-direction: column;
+        }
+        
+    }
+    #menu {
+        height: 0px;
+        border-left: 1px solid;
+        border-right: 1px solid;
+    }
+    #menu-btn {
+        display: block !important;
+        
+    }
     %anime-layout-mobile {
         .poster {
             float: none;
@@ -81,5 +212,14 @@
         table {
             width: 100%;
         }
+    }
+}
+@media screen and (min-width: 601px) {
+    .menu-holder {
+        top: 0 !important;
+        grid-template-rows: 3rem 0px !important;
+    }
+    #menu {
+        height: 3rem !important;
     }
 }

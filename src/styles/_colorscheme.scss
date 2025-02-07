@@ -1,8 +1,6 @@
 @use "base";
 @use "sass:color";
 
-
-
 // This is called only from the body element,
 // light is standard and dark is called from a media query prefers dark containing the body.
 @mixin theme($theme) {
@@ -17,6 +15,42 @@
         border-color: base.$lith-fg-color;
         @extend %light-theme; // Extends the theme by nesting.
     }
+}
+
+// Changes the color of the menu items depending on theme. Additionally, the active and hover effects are applied here as well.
+@mixin menu-item($theme) {
+    @if $theme == dark {
+        background-color: base.$dath-header-nav-bg-color;
+        li {
+            background-color: base.$dath-header-nav-bg-color;
+            a {
+                color: base.$dath-fg-color;
+                text-decoration: none;
+            }
+        }
+        li:active {
+            background-color: color.adjust(base.$dath-header-nav-bg-color, $lightness: -5%);
+        }
+        li:hover {
+            background-color: color.adjust(base.$dath-header-nav-bg-color, $lightness: -3%);
+        }
+    } @else if $theme == light {
+        background-color: base.$lith-header-nav-bg-color;
+        li {
+            background-color: base.$lith-header-nav-bg-color;
+            a {
+                color: base.$lith-fg-color;
+                text-decoration: none;
+            }
+        }
+        li:active {
+            background-color: color.adjust(base.$lith-header-nav-bg-color, $lightness: -5%);
+        }
+        li:hover {
+            background-color: color.adjust(base.$lith-header-nav-bg-color, $lightness: -3%);
+        }
+    }
+    
 }
 
 // The theme and visual effects for buttons.
@@ -34,6 +68,19 @@
 
 // Extends from the body through theme mixin when the theme is light.
 %light-theme {
+    header {
+        background-color: base.$lith-header-bg-color;
+        #menu {
+            @include menu-item(light);
+        }
+        #menu-btn {
+            background-color: base.$lith-header-bg-color;
+            border-color: base.$lith-fg-color;
+        }
+        .menu-holder {
+            border-top-color: base.$lith-header-bg-color;
+        }
+    }
     main {
         background-color: color.adjust(base.$lith-bg-color, $lightness: -3%);
     }
@@ -52,6 +99,20 @@
 @media (prefers-color-scheme: dark) {
     // Extends from the body through theme mixin when the theme is dark.
     %dark-theme {
+        header {
+            background-color: base.$dath-header-bg-color;
+            #menu {
+                @include menu-item(dark);
+            }
+            #menu-btn {
+                background-color: base.$dath-header-bg-color;
+                border-color: base.$dath-fg-color;
+            }
+            .menu-holder {
+                border-top-color: base.$dath-header-bg-color;
+            }
+        }
+
         main {
             background-color: color.adjust(base.$dath-bg-color, $lightness: -3%);
         }

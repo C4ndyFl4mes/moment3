@@ -6,11 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/main.scss">
     <script src="../scripts/main.js" type="module"></script>
+    <script src="../scripts/menu.js" type="module"></script>
     <title>Startsida</title>
 </head>
 
 <body>
-    <header></header>
+    <header>
+        <p>Moment 3</p>
+        
+        <div class="menu-holder" id="menu-holder">
+            
+            <nav id="menu">
+                <ul>
+                    <li class="here"><a href="index.html">Startsida</a></li>
+                    <li><a href="#">Info</a></li>
+                    <li><a href="#">Bilder</a></li>
+                    <li><a href="scss.html">SCSS</a></li>
+                    <li><a href="#">Om</a></li>
+                </ul>
+            </nav>
+            <button id="menu-btn" class="button">
+                <img src="../assets/icons/menu.svg" width="50px" height="50px" alt="">
+            </button>
+        </div>
+    </header>
     <main>
         <h1>Top Anime</h1>
         <div class="list-navigation">
