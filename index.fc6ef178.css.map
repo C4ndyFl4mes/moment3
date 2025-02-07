@@ -1,1 +1,0 @@
-{"mappings":"ACAA","sources":["index.fc6ef178.css","src/styles/main.scss"],"sourcesContent":[".poster {\n  width: 100%;\n  max-width: 100px;\n  height: auto;\n}\n/*# sourceMappingURL=index.fc6ef178.css.map */\n",".poster{\r\n    width: 100%;\r\n    max-width: 100px;\r\n    height: auto;\r\n}"],"names":[],"version":3,"file":"index.fc6ef178.css.map"}
