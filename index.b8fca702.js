@@ -606,10 +606,10 @@ const maxPageSPAN = document.getElementById("max-pages");
 const animeListDIV = document.getElementById("anime-list");
 // När sidan laddas in hämtas och renderas första sidan av anime listan.
 window.onload = async ()=>{
-    if (!localStorage.getItem("animePagesofLists")) await getTopAnime();
+    if (!sessionStorage.getItem("animePagesofLists")) await getTopAnime();
     // Sätter visuellt vilken sida som användaren står på vid inladdning av sidan.
-    if (localStorage.getItem("page")) {
-        const pageData = JSON.parse(localStorage.getItem("page"));
+    if (sessionStorage.getItem("page")) {
+        const pageData = JSON.parse(sessionStorage.getItem("page"));
         pageNumberSPAN.innerHTML = pageData.current;
         maxPageSPAN.innerHTML = pageData.last;
     }
@@ -618,14 +618,14 @@ window.onload = async ()=>{
 // Renderar en sida beroende på vilken sida det är, standard är första sidan.
 async function renderList(page = 1) {
     // Uppdaterar visuellt vilken sida användaren står på.
-    if (localStorage.getItem("page")) {
-        const pageData = JSON.parse(localStorage.getItem("page"));
+    if (sessionStorage.getItem("page")) {
+        const pageData = JSON.parse(sessionStorage.getItem("page"));
         pageNumberSPAN.innerHTML = pageData.current;
         maxPageSPAN.innerHTML = pageData.last;
     }
-    if (localStorage.getItem("animePagesofLists")) {
-        // Hämtar listan från localStorage:
-        const pagesofLists = JSON.parse(localStorage.getItem("animePagesofLists"));
+    if (sessionStorage.getItem("animePagesofLists")) {
+        // Hämtar listan från sessionStorage:
+        const pagesofLists = JSON.parse(sessionStorage.getItem("animePagesofLists"));
         // Loopar igenom sidorna tills rätt sida är funnen, då anropas listOnPage med sidans lista som argument, därefter stoppas loopen.
         // Ifall sidlistan inte hittas i arrayen, då hämtas den sidlistan genom att anropa getTopAnime(sidnummer) och därefter renderas den nya sidlistan.
         for (const list of pagesofLists){
@@ -685,11 +685,11 @@ async function getTopAnime(page = 1) {
             return;
         }
         const data = await resp.json();
-        localStorage.setItem("page", JSON.stringify({
+        sessionStorage.setItem("page", JSON.stringify({
             current: page,
             last: data.pagination.last_visible_page
         })); // Sätter/uppdaterar vilken sida användaren står på.
-        animePagesofLists(page, data.data); // Anropar för att ordna en array som ska lagras i localStorage.
+        animePagesofLists(page, data.data); // Anropar för att ordna en array som ska lagras i sessionStorage.
     } catch (error) {
         console.error(error);
     }
@@ -698,14 +698,14 @@ async function getTopAnime(page = 1) {
 // page är som ett id som håller reda på vilken lista som den innehåller. Detta är för att vi endast hämtar en liten del av en gigantisk lista av anime.
 // list är den lista som tillhör page, i detta faller är det 10 list items.
 async function animePagesofLists(page, animeList) {
-    if (localStorage.getItem("animePagesofLists")) {
-        const pagesofLists = JSON.parse(localStorage.getItem("animePagesofLists"));
+    if (sessionStorage.getItem("animePagesofLists")) {
+        const pagesofLists = JSON.parse(sessionStorage.getItem("animePagesofLists"));
         pagesofLists.push({
             page: page,
             list: animeList
         });
-        localStorage.setItem("animePagesofLists", JSON.stringify(pagesofLists));
-    } else localStorage.setItem("animePagesofLists", JSON.stringify([
+        sessionStorage.setItem("animePagesofLists", JSON.stringify(pagesofLists));
+    } else sessionStorage.setItem("animePagesofLists", JSON.stringify([
         {
             page: page,
             list: animeList
@@ -719,8 +719,8 @@ searchFIELD.addEventListener("input", ()=>{
     timeout = setTimeout(async ()=>{
         // Om fältet är tomt kommer användaren hamna på sidan den var på innan sökningen.
         if (searchFIELD.value.trim() === "") {
-            if (localStorage.getItem("page")) {
-                const pageData = JSON.parse(localStorage.getItem("page"));
+            if (sessionStorage.getItem("page")) {
+                const pageData = JSON.parse(sessionStorage.getItem("page"));
                 pageNumberSPAN.innerHTML = pageData.current;
                 maxPageSPAN.innerHTML = pageData.last;
                 renderList(pageData.current); // <---- Sätter vilken sida användaren ska ställas på.
@@ -745,13 +745,13 @@ async function searchAnime(query) {
 }
 // Till föregående sida.
 prevBTN.addEventListener("click", ()=>{
-    if (localStorage.getItem("page")) {
-        const pageData = JSON.parse(localStorage.getItem("page"));
+    if (sessionStorage.getItem("page")) {
+        const pageData = JSON.parse(sessionStorage.getItem("page"));
         // Stegar bakåt i en loop. Om användaren står på sida 1 blir föregående sida sista sidan med hjälp av if-satsen nedan.
         let prevPage = (pageData.current - 1 + pageData.last) % pageData.last;
         // Sista sidan blir pageData.last % pageData.last men det blir 0 och det finns inte och för att sista sidan ska bli möjlig måste sida 0 vara sista sidan. 
         if (prevPage == 0) prevPage = pageData.last;
-        localStorage.setItem("page", JSON.stringify({
+        sessionStorage.setItem("page", JSON.stringify({
             current: prevPage,
             last: pageData.last
         })); // Sätter/uppdaterar vilken sida användaren står på.
@@ -760,12 +760,12 @@ prevBTN.addEventListener("click", ()=>{
 });
 // Till nästa sida.
 nextBTN.addEventListener("click", ()=>{
-    if (localStorage.getItem("page")) {
-        const pageData = JSON.parse(localStorage.getItem("page"));
+    if (sessionStorage.getItem("page")) {
+        const pageData = JSON.parse(sessionStorage.getItem("page"));
         // Stegar frammåt i en loop. Precis som ovanstående funktion men åt andra hållet.
         let nextPage = (pageData.current + 1) % pageData.last;
         if (nextPage == 0) nextPage = pageData.last;
-        localStorage.setItem("page", JSON.stringify({
+        sessionStorage.setItem("page", JSON.stringify({
             current: nextPage,
             last: pageData.last
         })); // Sätter/uppdaterar vilken sida användaren står på.
