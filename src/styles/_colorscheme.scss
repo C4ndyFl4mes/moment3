@@ -83,6 +83,9 @@
     }
     main {
         background-color: color.adjust(base.$lith-bg-color, $lightness: -3%);
+        .information-box {
+            background-color: base.$alth-info-box-bg-color;
+        }
     }
 
     .anime-list-item {
@@ -92,6 +95,10 @@
     #search-field {
         background-color: base.$lith-search-bg-color;
         font-family: base.$font-stack;
+    }
+
+    footer {
+        background-color: base.$lith-header-bg-color;
     }
 }
 
@@ -115,6 +122,9 @@
 
         main {
             background-color: color.adjust(base.$dath-bg-color, $lightness: -3%);
+            .information-box {
+                background-color: base.$alth-info-box-bg-color;
+            }
         }
 
         .anime-list-item {
@@ -124,6 +134,10 @@
             background-color: base.$dath-search-bg-color;
             color: base.$dath-fg-color;
             font-family: base.$font-stack;
+        }
+
+        footer {
+            background-color: base.$dath-header-bg-color;
         }
     }
 }

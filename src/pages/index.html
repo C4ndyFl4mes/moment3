@@ -13,9 +13,9 @@
 <body>
     <header>
         <p>Moment 3</p>
-        
+
         <div class="menu-holder" id="menu-holder">
-            
+
             <nav id="menu">
                 <ul>
                     <li class="here"><a href="index.html">Startsida</a></li>
@@ -54,12 +54,28 @@
                 </svg>
             </button>
         </div>
+        <article class="information-box">
+            <h2>Information</h2>
+            <p>API:n som används för att hämta anime information är Jikan, en offentlig API. För att undvika onödiga
+                förfrågningar till Jikan, används sessionStorage för att komma ihåg vilka sidor som redan har hämtats. Sökfältet har en 500ms delay mellan input och sökning för att inte gå över gränsen. Tyvärr har jag inte lagt det på pilarna för navigera mellan olika sidor. Det ska dock gå bra om man väntar någon sekund, har lagt en alert vid error 429.
+            </p>
+            <p>Eftersom maximalt antal sidor förändras ständigt. Ibland krymper den och så om sidan är uppe allt för länge, kan det bli en bugg när man går under sida ett och hamnar på en sida som inte längre finns.</p>
+        </article>
         <p class="page-holder">
             Sida: <span id="page-number">1</span> av <span id="max-pages"></span>
         </p>
         <div id="anime-list"></div>
     </main>
-    <footer></footer>
+    <footer>
+        <article>
+            <h2>Uppgift</h2>
+            <p>DT211G, Frontend-baserad webbutveckling (distans): Moment 3 - CSS-preprocessorer</p>
+        </article>
+        <aarticle>
+            <h2>Webbplatsen</h2>
+            <p>© Isaac Svedin, 2025</p>
+        </aarticle>
+    </footer>
 </body>
 
 </html>
