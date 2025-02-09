@@ -66,7 +66,7 @@ function listOnPage(list) {
                         <source srcset="${anime.images.webp.image_url}" type="image/webp">
                         <img src="${anime.images.jpg.image_url}" width="100" height="141" alt="" loading="lazy" class=poster>
                     </picture>
-                    <table>
+                    <table class=anime-info-table>
                         <thead>
                             <tr>
                                 <th>Rank</th>

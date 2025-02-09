@@ -12,51 +12,9 @@ body {
     line-height: base.$global-line-height;
 }
 
-
-
-
-
-// The div that holds the anime list.
-#anime-list {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 75px;
-}
-
-// The poster for anime
-.poster {
-    width: 100%;
-    max-width: 225px;
-    height: auto;
-}
-
-// To turn the svg arrow on the previous button the other way.
-.prev {
-    transform: rotate(180deg);
-}
-
-.anime-list-item {
-    @extend %anime-layout;
-    // line-height: base.$anime-line-height;
-}
-
 // Changes the theme from the body to all relevant child elements through extension in the theme mixin.
 @media (prefers-color-scheme: dark) {
     body {
         @include colorscheme.theme(dark);
-    }
-}
-
-@media screen and (max-width: 600px) {
-    main {
-        width: 100%;
-        margin: 0;
-        padding: 0;
-    }
-
-    .anime-list-item {
-        @extend %anime-layout-mobile;
     }
 }

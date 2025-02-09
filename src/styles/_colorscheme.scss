@@ -80,6 +80,9 @@
         .menu-holder {
             border-top-color: base.$lith-header-bg-color;
         }
+        #menu-btn>svg {
+            fill: base.$lith-fg-color;
+        }
     }
     main {
         background-color: color.adjust(base.$lith-bg-color, $lightness: -3%);
@@ -102,8 +105,21 @@
     }
 }
 
+.anime-info-table {
+    td,
+    th {
+        @include theme(light);
+    }
+}
+
 // Cannot extend cross queries.
 @media (prefers-color-scheme: dark) {
+    .anime-info-table {
+        td,
+        th {
+            @include theme(dark);
+        }
+    }
     // Extends from the body through theme mixin when the theme is dark.
     %dark-theme {
         header {
@@ -118,6 +134,9 @@
             .menu-holder {
                 border-top-color: base.$dath-header-bg-color;
             }
+            #menu-btn>svg {
+                fill: base.$dath-fg-color;
+            }
         }
 
         main {
@@ -129,7 +148,9 @@
 
         .anime-list-item {
             background-color: color.adjust(base.$dath-bg-color, $lightness: -6%);
+            
         }
+        
         #search-field {
             background-color: base.$dath-search-bg-color;
             color: base.$dath-fg-color;
