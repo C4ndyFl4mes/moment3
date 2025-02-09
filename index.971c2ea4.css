@@ -197,6 +197,7 @@ main {
   flex-direction: column;
   width: 95%;
   max-width: 1400px;
+  min-height: 100vh;
   margin: 10rem auto 0;
   padding: 1rem;
   display: flex;
@@ -223,6 +224,20 @@ main .information-box p {
 main .page-holder {
   align-self: flex-end;
   margin: 2rem 2rem .5rem;
+}
+
+main .scss-evaluation-article {
+  width: 90%;
+  max-width: 700px;
+}
+
+main .scss-evaluation-article > ul {
+  margin-top: 0;
+  margin-bottom: 2rem;
+}
+
+main .scss-evaluation-article > p {
+  margin-bottom: .2rem;
 }
 
 .list-navigation {
