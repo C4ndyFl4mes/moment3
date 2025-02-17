@@ -1,6 +1,7 @@
 @use "base"; // <----------------- Variables.
 @use "layout"; // <--------------- Layouts.
 @use "colorscheme"; // <---------- Dark/Light Themes.
+@use "animations"; // <----------- Animations.
 
 body {
     margin: 0;

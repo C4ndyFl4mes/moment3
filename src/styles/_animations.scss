@@ -1,0 +1,67 @@
+// Animation layout
+
+.animation-display-frame {
+    height: 400px;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.animation-description {
+    flex: 1;
+    padding: 0.5rem;
+}
+
+.animation-box {
+    flex: 1;
+    border: 1px solid;
+    position: relative;
+}
+
+// Animation elements
+
+#circle-displacement {
+    position: absolute;
+    background-color: green;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    animation: displacement 4s ease-in-out infinite;
+}
+
+// Animation keyframes
+
+@keyframes displacement {
+    0% {
+        background-color: red;
+        left: 0;
+        top: 0;
+    }
+
+    25% {
+        background-color: green;
+        left: 100%;
+        top: 0;
+        transform: translateX(-100%);
+    }
+
+    50% {
+        background-color: blue;
+        left: 100%;
+        top: 100%;
+        transform: translate(-100%, -100%);
+    }
+
+    75% {
+        background-color: yellow;
+        left: 0;
+        top: 100%;
+        transform: translateY(-100%);
+    }
+
+    100% {
+        background-color: red;
+        left: 0;
+        top: 0;
+    }
+}
