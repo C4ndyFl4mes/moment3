@@ -144,6 +144,19 @@
             .information-box {
                 background-color: base.$alth-info-box-bg-color;
             }
+            #cooldown-div {
+                background-color: base.$dath-loading-bar-bg;
+            }
+            #powerful-btn {
+                background-color: base.$dath-fg-color;
+            }
+            #powerful-btn:hover {
+                background-color: color.adjust(base.$dath-fg-color, $lightness: -5%);
+            }
+            #powerful-btn:active {
+                background-color: color.adjust(base.$dath-fg-color, $lightness: -15%);
+                font-size: 0.8rem;
+            }
         }
 
         .anime-list-item {

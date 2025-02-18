@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="sv">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/main.scss">
     <script src="../scripts/menu.js" type="module"></script>
+    <script src="../scripts/animations.js" type="module"></script>
     <title>Animering</title>
 </head>
+
 <body>
     <header>
         <p>Moment 4</p>
@@ -37,6 +40,23 @@
         <h1>Animations</h1>
         <div class="animation-display-frame">
             <article class="animation-description">
+                <h2>En knapp</h2>
+                <p>
+                    En knapp som användaren måste hålla ned en viss tid innan knappen aktiveras vid släpp. Jag använde
+                    denna <a href="https://www.youtube.com/watch?v=ezP4kbOvs_E" target="_blank">youtube video</a> för
+                    att få till CSS reglerna för cooldown. Därefter manipuleras gradienten med JavaScript och det var
+                    riktigt krångligt men jag lyckades tillslut.
+                </p>
+            </article>
+            <div class="animation-box">
+                <div id="cooldown-div">
+                    <button id="powerful-btn">Tryck ner</button>
+                </div>
+                <span id="message"></span>
+            </div>
+        </div>
+        <div class="animation-display-frame">
+            <article class="animation-description">
                 <h2>Cirkel vid hörn</h2>
                 <p>
                     En cirkel som ändrar färg medan den förflyttas mellan hörn.
@@ -58,4 +78,5 @@
         </aarticle>
     </footer>
 </body>
+
 </html>
