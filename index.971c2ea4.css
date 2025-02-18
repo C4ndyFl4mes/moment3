@@ -1,120 +1,3 @@
-body .button {
-  background-color: #0fa;
-}
-
-body .button:hover {
-  background-color: #00e699;
-}
-
-body .button:active {
-  background-color: #0c8;
-}
-
-body header, .anime-list-item tr td header, .anime-list-item tr th header {
-  background-color: #ecb8ec;
-}
-
-body header #menu, .anime-list-item tr td header #menu, .anime-list-item tr th header #menu, body header #menu li, .anime-list-item tr td header #menu li, .anime-list-item tr th header #menu li {
-  background-color: #72cbee;
-}
-
-body header #menu li a, .anime-list-item tr td header #menu li a, .anime-list-item tr th header #menu li a {
-  color: #111;
-  text-decoration: none;
-}
-
-body header #menu li:active, .anime-list-item tr td header #menu li:active, .anime-list-item tr th header #menu li:active {
-  background-color: #5bc3eb;
-}
-
-body header #menu li:hover, .anime-list-item tr td header #menu li:hover, .anime-list-item tr th header #menu li:hover {
-  background-color: #64c6ec;
-}
-
-body header #menu-btn, .anime-list-item tr td header #menu-btn, .anime-list-item tr th header #menu-btn {
-  background-color: #ecb8ec;
-  border-color: #111;
-}
-
-body header .menu-holder, .anime-list-item tr td header .menu-holder, .anime-list-item tr th header .menu-holder {
-  border-top-color: #ecb8ec;
-}
-
-body main, .anime-list-item tr td main, .anime-list-item tr th main {
-  background-color: #e6e6e6;
-}
-
-body main .information-box, .anime-list-item tr td main .information-box, .anime-list-item tr th main .information-box {
-  background-color: #5599558c;
-}
-
-body .anime-list-item, .anime-list-item tr td .anime-list-item, .anime-list-item tr th .anime-list-item {
-  background-color: #dfdfdf;
-}
-
-body #search-field, .anime-list-item tr td #search-field, .anime-list-item tr th #search-field {
-  background-color: #0fa;
-  font-family: Roboto, Helvetica, Arial, sans-serif;
-}
-
-body footer, .anime-list-item tr td footer, .anime-list-item tr th footer {
-  background-color: #ecb8ec;
-}
-
-@media (prefers-color-scheme: dark) {
-  body header, .anime-list-item tr td header, .anime-list-item tr th header {
-    background-color: #505;
-  }
-
-  body header #menu, .anime-list-item tr td header #menu, .anime-list-item tr th header #menu, body header #menu li, .anime-list-item tr td header #menu li, .anime-list-item tr th header #menu li {
-    background-color: #00597c;
-  }
-
-  body header #menu li a, .anime-list-item tr td header #menu li a, .anime-list-item tr th header #menu li a {
-    color: #eee;
-    text-decoration: none;
-  }
-
-  body header #menu li:active, .anime-list-item tr td header #menu li:active, .anime-list-item tr th header #menu li:active {
-    background-color: #004763;
-  }
-
-  body header #menu li:hover, .anime-list-item tr td header #menu li:hover, .anime-list-item tr th header #menu li:hover {
-    background-color: #004e6d;
-  }
-
-  body header #menu-btn, .anime-list-item tr td header #menu-btn, .anime-list-item tr th header #menu-btn {
-    background-color: #505;
-    border-color: #eee;
-  }
-
-  body header .menu-holder, .anime-list-item tr td header .menu-holder, .anime-list-item tr th header .menu-holder {
-    border-top-color: #505;
-  }
-
-  body main, .anime-list-item tr td main, .anime-list-item tr th main {
-    background-color: #2b2b2b;
-  }
-
-  body main .information-box, .anime-list-item tr td main .information-box, .anime-list-item tr th main .information-box {
-    background-color: #5599558c;
-  }
-
-  body .anime-list-item, .anime-list-item tr td .anime-list-item, .anime-list-item tr th .anime-list-item {
-    background-color: #242424;
-  }
-
-  body #search-field, .anime-list-item tr td #search-field, .anime-list-item tr th #search-field {
-    color: #eee;
-    background-color: #007a52;
-    font-family: Roboto, Helvetica, Arial, sans-serif;
-  }
-
-  body footer, .anime-list-item tr td footer, .anime-list-item tr th footer {
-    background-color: #505;
-  }
-}
-
 header {
   z-index: 10;
   border-bottom: 1px solid;
@@ -187,7 +70,7 @@ header p {
   display: none;
 }
 
-#menu-btn img {
+#menu-btn svg {
   aspect-ratio: 1;
   height: 100%;
 }
@@ -252,9 +135,15 @@ main .scss-evaluation-article > p {
   height: 2rem;
 }
 
-.list-navigation svg {
-  aspect-ratio: 1;
-  height: 100%;
+.list-navigation .prev {
+  transform: rotate(180deg);
+}
+
+#anime-list {
+  flex-flow: wrap;
+  justify-content: center;
+  gap: 75px;
+  display: flex;
 }
 
 .anime-list-item {
@@ -268,6 +157,9 @@ main .scss-evaluation-article > p {
 
 .anime-list-item .poster {
   float: left;
+  width: 100%;
+  max-width: 225px;
+  height: auto;
   margin-right: 1rem;
 }
 
@@ -280,31 +172,21 @@ main .scss-evaluation-article > p {
   margin-bottom: .1rem;
 }
 
-.anime-list-item table {
+.anime-list-item .anime-info-table {
   width: 50%;
   margin: 0 auto;
 }
 
-.anime-list-item tr {
+.anime-list-item .anime-info-table tr {
   text-align: center;
   grid-template-rows: auto auto;
   grid-template-columns: 25% 25% 50%;
   display: grid;
 }
 
-.anime-list-item tr td, .anime-list-item tr th {
-  color: #111;
-  background-color: #eee;
-  border: 1px solid #111;
+.anime-list-item .anime-info-table tr td, .anime-list-item .anime-info-table tr th {
+  border: 1px solid;
   align-content: center;
-}
-
-@media (prefers-color-scheme: dark) {
-  .anime-list-item tr td, .anime-list-item tr th {
-    color: #eee;
-    background-color: #333;
-    border-color: #eee;
-  }
 }
 
 .here > a {
@@ -312,6 +194,15 @@ main .scss-evaluation-article > p {
   border-bottom: 3px solid;
   font-weight: 700;
   box-shadow: 0 5px 10px #000;
+}
+
+footer {
+  border-top: 1px solid;
+  flex-flow: wrap;
+  justify-content: space-evenly;
+  margin-top: 5rem;
+  padding: .5rem;
+  display: flex;
 }
 
 @media screen and (width <= 600px) {
@@ -345,15 +236,12 @@ main .scss-evaluation-article > p {
   .anime-list-item table {
     width: 100%;
   }
-}
 
-footer {
-  border-top: 1px solid;
-  flex-flow: wrap;
-  justify-content: space-evenly;
-  margin-top: 5rem;
-  padding: .5rem;
-  display: flex;
+  main {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
 }
 
 @media screen and (width >= 601px) {
@@ -367,6 +255,357 @@ footer {
   }
 }
 
+body .button {
+  background-color: #0fa;
+}
+
+body .button:hover {
+  background-color: #00e699;
+}
+
+body .button:active {
+  background-color: #0c8;
+}
+
+body header, .anime-info-table td header, .anime-info-table th header {
+  background-color: #ecb8ec;
+}
+
+body header #menu, .anime-info-table td header #menu, .anime-info-table th header #menu, body header #menu li, .anime-info-table td header #menu li, .anime-info-table th header #menu li {
+  background-color: #72cbee;
+}
+
+body header #menu li a, .anime-info-table td header #menu li a, .anime-info-table th header #menu li a {
+  color: #111;
+  text-decoration: none;
+}
+
+body header #menu li:active, .anime-info-table td header #menu li:active, .anime-info-table th header #menu li:active {
+  background-color: #5bc3eb;
+}
+
+body header #menu li:hover, .anime-info-table td header #menu li:hover, .anime-info-table th header #menu li:hover {
+  background-color: #64c6ec;
+}
+
+body header #menu-btn, .anime-info-table td header #menu-btn, .anime-info-table th header #menu-btn {
+  background-color: #ecb8ec;
+  border-color: #111;
+}
+
+body header .menu-holder, .anime-info-table td header .menu-holder, .anime-info-table th header .menu-holder {
+  border-top-color: #ecb8ec;
+}
+
+body header #menu-btn > svg, .anime-info-table td header #menu-btn > svg, .anime-info-table th header #menu-btn > svg {
+  fill: #111;
+}
+
+body main, .anime-info-table td main, .anime-info-table th main {
+  background-color: #e6e6e6;
+}
+
+body main .information-box, .anime-info-table td main .information-box, .anime-info-table th main .information-box {
+  background-color: #5599558c;
+}
+
+body .anime-list-item, .anime-info-table td .anime-list-item, .anime-info-table th .anime-list-item {
+  background-color: #dfdfdf;
+}
+
+body #search-field, .anime-info-table td #search-field, .anime-info-table th #search-field {
+  background-color: #0fa;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+}
+
+body footer, .anime-info-table td footer, .anime-info-table th footer {
+  background-color: #ecb8ec;
+}
+
+.anime-info-table td, .anime-info-table th {
+  color: #111;
+  background-color: #eee;
+  border-color: #111;
+}
+
+@media (prefers-color-scheme: dark) {
+  .anime-info-table td, .anime-info-table th {
+    color: #eee;
+    background-color: #333;
+    border-color: #eee;
+  }
+
+  body header, .anime-info-table td header, .anime-info-table th header {
+    background-color: #505;
+  }
+
+  body header #menu, .anime-info-table td header #menu, .anime-info-table th header #menu, body header #menu li, .anime-info-table td header #menu li, .anime-info-table th header #menu li {
+    background-color: #00597c;
+  }
+
+  body header #menu li a, .anime-info-table td header #menu li a, .anime-info-table th header #menu li a {
+    color: #eee;
+    text-decoration: none;
+  }
+
+  body header #menu li:active, .anime-info-table td header #menu li:active, .anime-info-table th header #menu li:active {
+    background-color: #004763;
+  }
+
+  body header #menu li:hover, .anime-info-table td header #menu li:hover, .anime-info-table th header #menu li:hover {
+    background-color: #004e6d;
+  }
+
+  body header #menu-btn, .anime-info-table td header #menu-btn, .anime-info-table th header #menu-btn {
+    background-color: #505;
+    border-color: #eee;
+  }
+
+  body header .menu-holder, .anime-info-table td header .menu-holder, .anime-info-table th header .menu-holder {
+    border-top-color: #505;
+  }
+
+  body header #menu-btn > svg, .anime-info-table td header #menu-btn > svg, .anime-info-table th header #menu-btn > svg {
+    fill: #eee;
+  }
+
+  body main, .anime-info-table td main, .anime-info-table th main {
+    background-color: #2b2b2b;
+  }
+
+  body main .information-box, .anime-info-table td main .information-box, .anime-info-table th main .information-box {
+    background-color: #5599558c;
+  }
+
+  body main #cooldown-div, .anime-info-table td main #cooldown-div, .anime-info-table th main #cooldown-div {
+    background-color: #222;
+  }
+
+  body main #powerful-btn, .anime-info-table td main #powerful-btn, .anime-info-table th main #powerful-btn {
+    background-color: #eee;
+  }
+
+  body main #powerful-btn:hover, .anime-info-table td main #powerful-btn:hover, .anime-info-table th main #powerful-btn:hover {
+    background-color: #e1e1e1;
+  }
+
+  body main #powerful-btn:active, .anime-info-table td main #powerful-btn:active, .anime-info-table th main #powerful-btn:active {
+    background-color: #c8c8c8;
+    font-size: .8rem;
+  }
+
+  body .anime-list-item, .anime-info-table td .anime-list-item, .anime-info-table th .anime-list-item {
+    background-color: #242424;
+  }
+
+  body #search-field, .anime-info-table td #search-field, .anime-info-table th #search-field {
+    color: #eee;
+    background-color: #007a52;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  body footer, .anime-info-table td footer, .anime-info-table th footer {
+    background-color: #505;
+  }
+}
+
+.animation-display-frame {
+  flex-direction: row;
+  height: 400px;
+  display: flex;
+}
+
+.animation-description {
+  flex: 1;
+  padding: .5rem;
+}
+
+.animation-box {
+  border: 1px solid;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center;
+  display: flex;
+  position: relative;
+}
+
+#animation-text {
+  user-select: none;
+  cursor: default;
+  align-self: center;
+  font-size: 1.5rem;
+  animation: 2s infinite coolText;
+  position: relative;
+}
+
+#animation-text:hover {
+  animation: 2s infinite coolTextUpsideDown;
+  transform: rotate(180deg);
+}
+
+#circle-displacement {
+  background-color: green;
+  border-radius: 50%;
+  width: 5rem;
+  height: 5rem;
+  animation: 4s ease-in-out infinite displacement;
+  position: absolute;
+}
+
+#cooldown-div {
+  z-index: 1;
+  border-radius: 10px;
+  align-self: center;
+  width: 10rem;
+  height: 2.5rem;
+  padding: .5rem;
+  position: relative;
+}
+
+#cooldown-div:after, #cooldown-div:before {
+  content: "";
+  background-image: var(--gradient, conic-gradient(blue 0%, transparent 0%));
+  z-index: -1;
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#cooldown-div:before {
+  filter: blur(1rem);
+  opacity: 1;
+}
+
+#powerful-btn {
+  z-index: 2;
+  border: none;
+  border-radius: 5px;
+  width: 10rem;
+  height: 2.5rem;
+  font-size: .9rem;
+  transition: all .3s;
+  position: relative;
+}
+
+#message {
+  align-self: center;
+}
+
+@keyframes coolText {
+  0% {
+    font-size: 1.5rem;
+    transform: rotate(0);
+  }
+
+  5% {
+    font-size: 1.4rem;
+    transform: rotate(2deg);
+  }
+
+  10% {
+    font-size: 1.3rem;
+    transform: rotate(-2deg);
+  }
+
+  15% {
+    font-size: 1.2rem;
+    transform: rotate(3deg);
+  }
+
+  20% {
+    transform: rotate(-3deg);
+  }
+
+  25% {
+    transform: rotate(0);
+  }
+
+  50% {
+    font-size: 2rem;
+  }
+
+  100% {
+    transform: rotate(0);
+  }
+}
+
+@keyframes coolTextUpsideDown {
+  0% {
+    font-size: 1.5rem;
+    transform: rotate(180deg);
+  }
+
+  5% {
+    font-size: 1.4rem;
+    transform: rotate(182deg);
+  }
+
+  10% {
+    font-size: 1.3rem;
+    transform: rotate(178deg);
+  }
+
+  15% {
+    font-size: 1.2rem;
+    transform: rotate(183deg);
+  }
+
+  20% {
+    transform: rotate(177deg);
+  }
+
+  25% {
+    transform: rotate(180deg);
+  }
+
+  50% {
+    font-size: 2rem;
+  }
+
+  100% {
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes displacement {
+  0% {
+    background-color: red;
+    top: 0;
+    left: 0;
+  }
+
+  25% {
+    background-color: green;
+    top: 0;
+    left: 100%;
+    transform: translateX(-100%);
+  }
+
+  50% {
+    background-color: #00f;
+    top: 100%;
+    left: 100%;
+    transform: translate(-100%, -100%);
+  }
+
+  75% {
+    background-color: #ff0;
+    top: 100%;
+    left: 0;
+    transform: translateY(-100%);
+  }
+
+  100% {
+    background-color: red;
+    top: 0;
+    left: 0;
+  }
+}
+
 body {
   color: #111;
   background-color: #eee;
@@ -376,36 +615,11 @@ body {
   line-height: 1.7rem;
 }
 
-#anime-list {
-  flex-flow: wrap;
-  justify-content: center;
-  gap: 75px;
-  display: flex;
-}
-
-.poster {
-  width: 100%;
-  max-width: 225px;
-  height: auto;
-}
-
-.prev {
-  transform: rotate(180deg);
-}
-
 @media (prefers-color-scheme: dark) {
   body {
     color: #eee;
     background-color: #333;
     border-color: #eee;
-  }
-}
-
-@media screen and (width <= 600px) {
-  main {
-    width: 100%;
-    margin: 0;
-    padding: 0;
   }
 }
 /*# sourceMappingURL=index.971c2ea4.css.map */
