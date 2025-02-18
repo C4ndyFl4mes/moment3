@@ -89,6 +89,25 @@
         .information-box {
             background-color: base.$alth-info-box-bg-color;
         }
+
+        // Background color for the grid menu in animations.
+        #item1 {
+            background-color: base.$lith-grid-menu-bg;
+        }
+
+        #cooldown-div {
+            background-color: base.$lith-loading-bar-bg;
+        }
+        #powerful-btn {
+            background-color: base.$dath-fg-color;
+        }
+        #powerful-btn:hover {
+            background-color: color.adjust(base.$dath-fg-color, $lightness: -5%);
+        }
+        #powerful-btn:active {
+            background-color: color.adjust(base.$dath-fg-color, $lightness: -15%);
+            font-size: 0.8rem;
+        }
     }
 
     .anime-list-item {
@@ -144,6 +163,11 @@
             .information-box {
                 background-color: base.$alth-info-box-bg-color;
             }
+            // Background color for the grid menu in animations.
+            #item1 {
+                background-color: base.$dath-grid-menu-bg;
+            }
+
             #cooldown-div {
                 background-color: base.$dath-loading-bar-bg;
             }
