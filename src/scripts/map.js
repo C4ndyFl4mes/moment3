@@ -1,5 +1,6 @@
 const searchPlaceINPUT = document.getElementById("search");
 const searchResultsDIV = document.getElementById("search-results");
+const mapIFRAME = document.getElementById("map");
 
 let timeout;
 searchPlaceINPUT.addEventListener("input", () => {
@@ -20,6 +21,9 @@ function listSearchResults(places) {
         const resultItemDIV = document.createElement("div");
         resultItemDIV.className = "result-item";
         resultItemDIV.innerHTML = `<p class=place-name><strong>${place.name}</strong></p><p class=coords>Latitud: ${place.lat} Longitud: ${place.lon}</p>`;
+        resultItemDIV.addEventListener("click", () => {
+            renderMap(place);
+        });
         searchResultsDIV.appendChild(resultItemDIV);
     });
 }
@@ -27,7 +31,7 @@ function listSearchResults(places) {
 /**
  * Hämtar platsers namn och koordinater.
  * @param {Söksträngen} query 
- * @returns En array av objekt som har egenskaperna name, lat och lon.
+ * @returns En array av objekt som har egenskaperna name, lat, lon och bbox. bbox är kartans hörn.
  */
 async function getPlacesFromSearch(query) {
     try {
@@ -39,11 +43,16 @@ async function getPlacesFromSearch(query) {
             places.push({
                 name: d.display_name,
                 lat: d.lat,
-                lon: d.lon
+                lon: d.lon,
+                bbox: d.boundingbox
             });
         });
         return places;
     } catch(error) {
         console.error(error);
     }
+}
+
+function renderMap(place) {
+    mapIFRAME.setAttribute("src", `https://www.openstreetmap.org/export/embed.html?bbox=${place.bbox[2]}%2C${place.bbox[0]}%2C${place.bbox[3]}%2C${place.bbox[1]}&layer=mapnik&marker=${place.lat}%2C${place.lon}`);
 }

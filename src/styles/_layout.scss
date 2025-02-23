@@ -250,6 +250,20 @@ footer {
 }
 
 // Search and map
+.search-box {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 4rem;
+}
+
+#search {
+    height: 2rem;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
 #search-results {
     width: 100%;
     display: flex;
@@ -278,7 +292,12 @@ footer {
     transform: scale(110%, 110%);
     z-index: 2;
 }
-
+#map {
+    align-self: center;
+    width: 75%;
+    height: auto;
+    aspect-ratio: 1/1;
+}
 // Mobile
 @media screen and (max-width: 600px) {
     // Center the "Moment 3" text.
