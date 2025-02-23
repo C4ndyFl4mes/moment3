@@ -240,6 +240,14 @@ footer {
     justify-content: space-evenly;
 }
 
+// Charts
+#chart1 .apexcharts-text{
+    display: none;
+}
+.charts {
+    align-self: center;
+    width: 75%;
+}
 // Mobile
 @media screen and (max-width: 600px) {
     // Center the "Moment 3" text.
@@ -280,6 +288,7 @@ footer {
         width: 100%;
         margin: 0;
         padding: 0;
+        margin-top: 10rem;
     }
 }
 

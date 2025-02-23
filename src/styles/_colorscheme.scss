@@ -118,7 +118,7 @@
         background-color: base.$lith-search-bg-color;
         font-family: base.$font-stack;
     }
-
+ 
     footer {
         background-color: base.$lith-header-bg-color;
     }
@@ -193,7 +193,18 @@
             color: base.$dath-fg-color;
             font-family: base.$font-stack;
         }
-
+        
+        // Charts
+        .apexcharts-text {
+            fill: base.$dath-fg-color;
+        }
+        .apexcharts-legend-text {
+            color: base.$dath-fg-color !important;
+        }
+        .apexcharts-title-text {
+            fill: base.$dath-fg-color;
+        }
+        
         footer {
             background-color: base.$dath-header-bg-color;
         }
