@@ -248,6 +248,37 @@ footer {
     align-self: center;
     width: 75%;
 }
+
+// Search and map
+#search-results {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.result-item {
+    font-size: 0.8rem;
+    line-height: 1rem;
+    border: 1px solid;
+    padding: 0.5rem;
+    transition: 0.3s transform;
+    user-select: none;
+    cursor: pointer;
+    .place-name{
+        margin: 0;
+    }
+    .coords {
+        margin: 0;
+        font-size: 0.7rem;
+    }
+}
+
+.result-item:hover {
+    transform: scale(110%, 110%);
+    z-index: 2;
+}
+
 // Mobile
 @media screen and (max-width: 600px) {
     // Center the "Moment 3" text.

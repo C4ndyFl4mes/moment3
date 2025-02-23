@@ -205,6 +205,11 @@
             fill: base.$dath-fg-color;
         }
         
+        // Search and map
+        .result-item {
+            background-color: color.adjust(base.$dath-bg-color, $lightness: -6%);
+        }
+
         footer {
             background-color: base.$dath-header-bg-color;
         }
