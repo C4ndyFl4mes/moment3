@@ -21,7 +21,7 @@ async function main() {
 
 /**
  * Renderar ett diagram efter en array.
- * @param {Antagningsdata array} data 
+ * @param {array} data - Antagningsdata
  */
 function renderPieChart(data) {
     const series = [];
@@ -68,7 +68,7 @@ function renderPieChart(data) {
 
 /**
  * Renderar ut ett stapeldiagram.
- * @param {Antagningsdata i en array} data 
+ * @param {array} data - Antagningsdata
  */
 function renderColumnChart(data) {
     const series = [];
@@ -112,9 +112,9 @@ function renderColumnChart(data) {
 
 /**
  * 
- * @param {Antagningsdata array} data 
- * @param {Sista indexvärdet} index 
- * @returns En ny array av antagningsdata från 0 till index.
+ * @param {array} data - Antagningsdata
+ * @param {number} index - Sista indexvärdet
+ * @returns {array} topData - En ny array av antagningsdata från 0 till index.
  */
 function selectUntilIndex(data, index) {
     const topData = [];
@@ -127,26 +127,27 @@ function selectUntilIndex(data, index) {
 }
 
 /**
- * 
- * @param {Ordnar antagningsdata i fallande ordning} data 
- * @returns En array av antagningsdata i fallande ordning.
+ * Ordnar en array i fallande orning.
+ * @param {array} data - Ordnar antagningsdata i fallande ordning
+ * @returns {array} sortedData - En array av antagningsdata i fallande ordning.
  */
 function orderByTotalApplicants(data) {
     return data.sort((a, b) => b.applicantsTotal - a.applicantsTotal);
 }
 
 /**
- * 
- * @param {Rå antagningsdata} rawData 
- * @param {Vilken antagningsdata som ska hämtas} type 
- * @returns 
+ * Väljer vilken antagningsdata som ska hämtas.
+ * @param {array} rawData - Rå antagningsdata
+ * @param {string} type - Vilken antagningsdata som ska hämtas
+ * @returns {array} selectedData - vald antagningsdata
  */
 function selectType(rawData, type) {
     return selectedData = rawData.filter(d => d.type === type);
 }
 
 /**
- * @returns En array av antagningsdata.
+ * Hämtar antagningsdata från extern källa.
+ * @returns {array} data - En array av antagningsdata.
  */
 async function getAdmissionStats() {
     try {

@@ -26,14 +26,156 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>window.addEventListener("load", async () => {
-    const admissionStatData = await getAdmissionStats();
-    console.table(admissionStatData);
-});
+            <pre class="prettyprint source linenums"><code>import ApexCharts from 'apexcharts';
 
+window.addEventListener("load", main);
 
 /**
- * @returns En array av antagningsstatistik.
+ * Allt utgår från main.
+ */
+async function main() {
+    const admissionStatData = await getAdmissionStats();
+    
+    let typeData = selectType(admissionStatData, "Kurs");
+    let orderedData = orderByTotalApplicants(typeData);
+    let topData = selectUntilIndex(orderedData, 5);
+    renderColumnChart(topData);
+
+    typeData = selectType(admissionStatData, "Program");
+    orderedData = orderByTotalApplicants(typeData);
+    topData = selectUntilIndex(orderedData, 4);
+    renderPieChart(topData);
+}
+
+/**
+ * Renderar ett diagram efter en array.
+ * @param {array} data - Antagningsdata
+ */
+function renderPieChart(data) {
+    const series = [];
+    const labels = [];
+
+    data.forEach(d => {
+        series.push(Number(d.applicantsTotal));
+        labels.push(d.name);
+    });
+    console.log("Series:", series);
+    const options = {
+        chart: {
+            type: 'donut'
+        }, title: {
+            text: 'Ansökningsstatistik program',
+            align: 'center'
+        },
+        plotOptions: {
+            pie: {
+                expandOnClick: false,
+                donut: {
+                    size: '45%',
+                    labels: {
+                        show: true,
+                        total: {
+                            show: true,
+                            label: "Total",
+
+                            formatter: function (w) {
+                                return w.globals.seriesTotals.reduce((a, b) => a + b, 0);
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        series: series,
+        labels: labels
+    };
+
+    const chart = new ApexCharts(document.getElementById("chart2"), options);
+    chart.render();
+}
+
+/**
+ * Renderar ut ett stapeldiagram.
+ * @param {array} data - Antagningsdata
+ */
+function renderColumnChart(data) {
+    const series = [];
+    const categories = [];
+    data.forEach(d => {
+        series.push(d.applicantsTotal);
+        categories.push(d.name);
+    });
+    const options = {
+        chart: {
+            type: 'bar'
+        },
+        plotOptions: {
+            bar: {
+                distributed: true
+            }
+        },
+        title: {
+            text: 'Ansökningsstatistik kurser',
+            align: 'center'
+        },
+        legend: {
+          show: true
+        },
+        series: [{
+            data: series
+        }],
+        xaxis: {
+            categories: categories,
+            labels: {
+                style: {
+                  fontSize: '12px'
+                }
+              }
+        }
+    };
+
+    const chart = new ApexCharts(document.getElementById("chart1"), options);
+    chart.render();
+}
+
+/**
+ * 
+ * @param {array} data - Antagningsdata
+ * @param {number} index - Sista indexvärdet
+ * @returns {array} topData - En ny array av antagningsdata från 0 till index.
+ */
+function selectUntilIndex(data, index) {
+    const topData = [];
+    if (data.length - 1 >= index &amp;&amp; 0 &lt;= index) {
+        for (let i = 0; i &lt;= index; i++) {
+            topData.push(data[i]);
+        }
+    }
+    return topData;
+}
+
+/**
+ * Ordnar en array i fallande orning.
+ * @param {array} data - Ordnar antagningsdata i fallande ordning
+ * @returns {array} sortedData - En array av antagningsdata i fallande ordning.
+ */
+function orderByTotalApplicants(data) {
+    return data.sort((a, b) => b.applicantsTotal - a.applicantsTotal);
+}
+
+/**
+ * Väljer vilken antagningsdata som ska hämtas.
+ * @param {array} rawData - Rå antagningsdata
+ * @param {string} type - Vilken antagningsdata som ska hämtas
+ * @returns {array} selectedData - vald antagningsdata
+ */
+function selectType(rawData, type) {
+    return selectedData = rawData.filter(d => d.type === type);
+}
+
+/**
+ * Hämtar antagningsdata från extern källa.
+ * @returns {array} data - En array av antagningsdata.
  */
 async function getAdmissionStats() {
     try {
@@ -52,13 +194,13 @@ async function getAdmissionStats() {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#getAdmissionStats">getAdmissionStats</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#getAdmissionStats">getAdmissionStats</a></li><li><a href="global.html#getPlacesFromSearch">getPlacesFromSearch</a></li><li><a href="global.html#listSearchResults">listSearchResults</a></li><li><a href="global.html#main">main</a></li><li><a href="global.html#orderByTotalApplicants">orderByTotalApplicants</a></li><li><a href="global.html#renderColumnChart">renderColumnChart</a></li><li><a href="global.html#renderMap">renderMap</a></li><li><a href="global.html#renderPieChart">renderPieChart</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#selectType">selectType</a></li><li><a href="global.html#selectUntilIndex">selectUntilIndex</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Fri Feb 21 2025 13:32:19 GMT+0100 (centraleuropeisk normaltid)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Mon Feb 24 2025 08:59:54 GMT+0100 (centraleuropeisk normaltid)
 </footer>
 
 <script> prettyPrint(); </script>
