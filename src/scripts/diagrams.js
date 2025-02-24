@@ -1,11 +1,6 @@
 import ApexCharts from 'apexcharts';
 
-window.addEventListener("load", main);
-
-/**
- * Allt utgår från main.
- */
-async function main() {
+window.addEventListener("load", async () => {
     const admissionStatData = await getAdmissionStats();
     
     let typeData = selectType(admissionStatData, "Kurs");
@@ -17,7 +12,7 @@ async function main() {
     orderedData = orderByTotalApplicants(typeData);
     topData = selectUntilIndex(orderedData, 4);
     renderPieChart(topData);
-}
+});
 
 /**
  * Renderar ett diagram efter en array.
@@ -142,7 +137,8 @@ function orderByTotalApplicants(data) {
  * @returns {array} selectedData - vald antagningsdata
  */
 function selectType(rawData, type) {
-    return selectedData = rawData.filter(d => d.type === type);
+    let selectedData = rawData.filter(d => d.type === type);
+    return selectedData;
 }
 
 /**
@@ -152,7 +148,8 @@ function selectType(rawData, type) {
 async function getAdmissionStats() {
     try {
         const resp = await fetch("https://studenter.miun.se/~mallar/dt211g/");
-        return await resp.json();
+        const data = await resp.json();
+        return data;
     } catch (error) {
         console.error(error);
     }
