@@ -599,10 +599,7 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _apexcharts = require("apexcharts");
 var _apexchartsDefault = parcelHelpers.interopDefault(_apexcharts);
-window.addEventListener("load", main);
-/**
- * Allt utgår från main.
- */ async function main() {
+window.addEventListener("load", async ()=>{
     const admissionStatData = await getAdmissionStats();
     let typeData = selectType(admissionStatData, "Kurs");
     let orderedData = orderByTotalApplicants(typeData);
@@ -612,10 +609,10 @@ window.addEventListener("load", main);
     orderedData = orderByTotalApplicants(typeData);
     topData = selectUntilIndex(orderedData, 4);
     renderPieChart(topData);
-}
+});
 /**
  * Renderar ett diagram efter en array.
- * @param {Antagningsdata array} data 
+ * @param {array} data - Antagningsdata
  */ function renderPieChart(data) {
     const series = [];
     const labels = [];
@@ -658,7 +655,7 @@ window.addEventListener("load", main);
 }
 /**
  * Renderar ut ett stapeldiagram.
- * @param {Antagningsdata i en array} data 
+ * @param {array} data - Antagningsdata
  */ function renderColumnChart(data) {
     const series = [];
     const categories = [];
@@ -701,35 +698,38 @@ window.addEventListener("load", main);
 }
 /**
  * 
- * @param {Antagningsdata array} data 
- * @param {Sista indexvärdet} index 
- * @returns En ny array av antagningsdata från 0 till index.
+ * @param {array} data - Antagningsdata
+ * @param {number} index - Sista indexvärdet
+ * @returns {array} topData - En ny array av antagningsdata från 0 till index.
  */ function selectUntilIndex(data, index) {
     const topData = [];
     if (data.length - 1 >= index && 0 <= index) for(let i = 0; i <= index; i++)topData.push(data[i]);
     return topData;
 }
 /**
- * 
- * @param {Ordnar antagningsdata i fallande ordning} data 
- * @returns En array av antagningsdata i fallande ordning.
+ * Ordnar en array i fallande orning.
+ * @param {array} data - Ordnar antagningsdata i fallande ordning
+ * @returns {array} sortedData - En array av antagningsdata i fallande ordning.
  */ function orderByTotalApplicants(data) {
     return data.sort((a, b)=>b.applicantsTotal - a.applicantsTotal);
 }
 /**
- * 
- * @param {Rå antagningsdata} rawData 
- * @param {Vilken antagningsdata som ska hämtas} type 
- * @returns 
+ * Väljer vilken antagningsdata som ska hämtas.
+ * @param {array} rawData - Rå antagningsdata
+ * @param {string} type - Vilken antagningsdata som ska hämtas
+ * @returns {array} selectedData - vald antagningsdata
  */ function selectType(rawData, type) {
-    return selectedData = rawData.filter((d)=>d.type === type);
+    let selectedData = rawData.filter((d)=>d.type === type);
+    return selectedData;
 }
 /**
- * @returns En array av antagningsdata.
+ * Hämtar antagningsdata från extern källa.
+ * @returns {array} data - En array av antagningsdata.
  */ async function getAdmissionStats() {
     try {
         const resp = await fetch("https://studenter.miun.se/~mallar/dt211g/");
-        return await resp.json();
+        const data = await resp.json();
+        return data;
     } catch (error) {
         console.error(error);
     }
