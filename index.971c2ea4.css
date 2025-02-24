@@ -205,6 +205,66 @@ footer {
   display: flex;
 }
 
+#chart1 .apexcharts-text {
+  display: none;
+}
+
+.charts {
+  align-self: center;
+  width: 75%;
+}
+
+.search-box {
+  flex-direction: column;
+  align-self: center;
+  align-items: center;
+  margin-bottom: 4rem;
+  display: flex;
+}
+
+#search {
+  height: 2rem;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+}
+
+#search-results {
+  flex-flow: wrap;
+  width: 100%;
+  display: flex;
+}
+
+.result-item {
+  user-select: none;
+  cursor: pointer;
+  border: 1px solid;
+  padding: .5rem;
+  font-size: .8rem;
+  line-height: 1rem;
+  transition: transform .3s;
+}
+
+.result-item .place-name {
+  margin: 0;
+}
+
+.result-item .coords {
+  margin: 0;
+  font-size: .7rem;
+}
+
+.result-item:hover {
+  z-index: 2;
+  transform: scale(1.1);
+}
+
+#map {
+  aspect-ratio: 1;
+  align-self: center;
+  width: 75%;
+  height: auto;
+}
+
 @media screen and (width <= 600px) {
   header {
     text-align: center;
@@ -239,7 +299,7 @@ footer {
 
   main {
     width: 100%;
-    margin: 0;
+    margin: 10rem 0 0;
     padding: 0;
   }
 }
@@ -427,6 +487,22 @@ body footer, .anime-info-table td footer, .anime-info-table th footer {
     color: #eee;
     background-color: #007a52;
     font-family: Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  body .apexcharts-text, .anime-info-table td .apexcharts-text, .anime-info-table th .apexcharts-text {
+    fill: #eee;
+  }
+
+  body .apexcharts-legend-text, .anime-info-table td .apexcharts-legend-text, .anime-info-table th .apexcharts-legend-text {
+    color: #eee !important;
+  }
+
+  body .apexcharts-title-text, .anime-info-table td .apexcharts-title-text, .anime-info-table th .apexcharts-title-text {
+    fill: #eee;
+  }
+
+  body .result-item, .anime-info-table td .result-item, .anime-info-table th .result-item {
+    background-color: #242424;
   }
 
   body footer, .anime-info-table td footer, .anime-info-table th footer {
